@@ -1,6 +1,7 @@
 import math
 import matplotlib.pyplot as plt
 import random
+import time
 
 # Najbliži komšija za svaki grad
 def nearest_neighbor(cities):
@@ -60,23 +61,53 @@ def two_opt(cities, max_iterations=100):
     # Vrati put bez poslednjeg grada, i njegovu dužinu
     return path[:-1], path_length(path[:-1], cities)
 
-# Nasumicni primjer
+# Nasumicni primjer 10 gradova
 random.seed(1)  
 cities = [(random.randint(0, 10), random.randint(0, 10)) for _ in range(10)]
 
+start_time = time.time()
 path, length = two_opt(cities)
-print("Path:", path)
-print("Length:", length)
+end_time = time.time()
+
+print("n=10 = ", end_time - start_time, "sekundi")
 
 path_coords = [cities[i] for i in path]
 path_coords.append(path_coords[0])  
 
 xs, ys = zip(*path_coords)
 
-plt.scatter(xs, ys, color='blue')
-plt.plot(xs, ys, color='red')
 
-for i, city in enumerate(path):
-    plt.annotate(str(city), xy=cities[city], xytext=(10, 5), textcoords='offset points')
 
-plt.show()
+# 100 gradova
+cities = [(random.randint(0, 10), random.randint(0, 10)) for _ in range(100)]
+
+start_time = time.time()
+path, length = two_opt(cities)
+end_time = time.time()
+
+print("n=100 = ", end_time - start_time, "sekundi")
+
+path_coords = [cities[i] for i in path]
+path_coords.append(path_coords[0])  
+
+xs, ys = zip(*path_coords)
+
+
+
+# 200 gradova
+cities = [(random.randint(0, 10), random.randint(0, 10)) for _ in range(200)]
+
+start_time = time.time()
+path, length = two_opt(cities)
+end_time = time.time()
+
+
+print("n=200 = ", end_time - start_time, "sekundi")
+
+path_coords = [cities[i] for i in path]
+path_coords.append(path_coords[0])  
+
+xs, ys = zip(*path_coords)
+
+
+
